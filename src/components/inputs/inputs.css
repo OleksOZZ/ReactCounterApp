@@ -1,23 +1,14 @@
-.btn-group button {
-    background-color: #2c35af;
+.btn-group input {
+    background-color: #66af5c;
     border: 1px solid darkblue;
     color: white;
     padding: 10px 24px;
+    margin: 22px;
     cursor: pointer;
-    float: left;
-    width: 20%;
+    float: inside;
+    width: 70%;
 }
 
-.enter-btn {
-    background-color: #2c35af;
-    border: 1px solid darkblue;
-    color: white;
-    padding: 10px 24px;
-    cursor: pointer;
-    float: right;
-    width: 20%;
-    margin: 22px;
-}
 .btn-group button:not(:last-child) {
     border-right: none;
 }

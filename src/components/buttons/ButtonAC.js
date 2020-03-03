@@ -5,7 +5,7 @@ function ButtonAC({give0}) {
 
     const ac = () => {
         give0();
-        console.log(`annihilated`);
+        console.log(`value was set to 0`);
     };
     return (
         <div>

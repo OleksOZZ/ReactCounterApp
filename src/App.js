@@ -7,6 +7,8 @@ import ButtonDecrOne from "./components/buttons/ButtonDecrOne";
 import ButtonIncrHundred from "./components/buttons/ButtonIncrHundred";
 import ButtonDecrHundred from "./components/buttons/ButtonDecrHundred";
 import ButtonAC from "./components/buttons/ButtonAC";
+import Number from "./components/inputs/Number";
+import Enter from "./components/buttons/Enter";
 
 // 1! у функціональної компоненти немає життєвого циклу. Функціональна
     // це функціональна компонента
@@ -28,9 +30,11 @@ constructor(props) {
     //console.log(`props:`, `1:`, msg, `2:`, func);
     console.log("constructor"); // конструкотр - перша фіча при створенні компонента в його життєвому циклі спрацьовує коли компонента створилась
     this.state ={
-        count :0,
-        data: null
+        count : 0,
+        //num : parseInt(document.getElementById("inputNumber").value),
     };
+
+
     //this.handlerIncr1 =this.handlerIncr1.bind(this)
 }
 
@@ -58,24 +62,33 @@ constructor(props) {
     /*handlerIncr1 () { // щоб не писати bind в конструкторі використовується стрілкова функція
         this.setState({count: this.state.count + 1})
     }*/
-    handlerIncr1 =()=>{
-        this.setState({count: this.state.count + 1}) // setState дьоргає за собою render.
-    };
 
-    handlerDecr1 =()=> {
-        this.setState({count: this.state.count - 1})
-    };
 
-    handlerIncr100 =() => {
-        this.setState({count: this.state.count + 100})
+    handlerMath =(i)=>{
+        let numb = this.state.count + i;
+        numb>=0 && this.setState({count: numb});
     };
-
-    handlerDecr100 =() => {
-      this.setState({count: this.state.count - 100})
-    };
+    // setState дьоргає за собою render.
+    //document.getElementById("inputNumber").value = this.state.count;
 
     handlerAC =() => {
       this.setState({count: this.state.count = 0})
+    };
+
+
+    setNumber =() => {
+        let num = parseFloat(document.getElementById("inputNumber").value);
+        //if (num === 0 || num === null || num ===undefined || isNaN(num)) {
+            !isNaN(num) && num > -1 && this.setState({count: this.state.count = num});
+
+        //}else{
+        //      this.setState({count: parseInt(this.state.count)+parseInt(num)})
+        // }
+    };
+
+    compileNumber = () => {
+        let num = parseInt(document.getElementById("inputNumber").value);
+        !isNaN(num) && num > -1 && this.setState({count: this.state.count += num});
     };
 
 
@@ -87,10 +100,14 @@ constructor(props) {
               <div className="btn-group">
                     <h1  style={{textAlign: "center"}}>COUNTER REACT APP</h1>
                     <Count  count={count}/>
-                    <Button myFunc={this.handlerIncr1}/>
-                    <ButtonDecrOne decrFunc={this.handlerDecr1}/>
-                    <ButtonIncrHundred incrHundred={this.handlerIncr100}/>
-                    <ButtonDecrHundred decrHundred={this.handlerDecr100}/>
+                    <div>
+                        <Number changeNumber={this.setNumber}></Number>
+                        <Enter enterNumber={this.compileNumber}/>
+                    </div>
+                    <Button myFunc={this.handlerMath.bind(null,1)}/>
+                    <ButtonDecrOne decrFunc={this.handlerMath.bind(null,-1)}/>
+                    <ButtonIncrHundred incrHundred={this.handlerMath.bind(null,100)}/>
+                    <ButtonDecrHundred decrHundred={this.handlerMath.bind(null,-100)}/>
                     <ButtonAC give0={this.handlerAC}/>
               </div>
           </div>
